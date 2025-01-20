@@ -61,7 +61,6 @@ public class ProcrastinAid {
 
     public static Task addTodo(String userInp){
         Task newTask = new ToDo(userInp);
-        System.out.println(newTask.getIcon() + newTask.getStatusIcon() + " " + newTask);
         taskList.add(newTask);
         return newTask;
     }

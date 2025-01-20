@@ -1,0 +1,15 @@
+list
+todo todo1
+deadline deadline1 /by Sunday
+event event1 /from Mon 2pm /to 4pm
+list
+deadline deadline2 /by Sunday 4pm
+todo todo2
+list
+mark 2
+mark 4
+list
+mark 1
+unmark 2
+list
+bye
