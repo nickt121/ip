@@ -51,7 +51,7 @@ public class ProcrastinAid {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             Task tempTask = taskList.get(i);
-            System.out.println(String.valueOf(i + 1) + ".[" + tempTask.getStatusIcon() + "] " + tempTask.getDescription());
+            System.out.println(String.valueOf(i + 1) + ".[" + tempTask.getStatusIcon() + "] " + tempTask.toString());
         }
     }
 
@@ -60,7 +60,7 @@ public class ProcrastinAid {
         int i = Integer.parseInt(taskNumber) - 1;
         Task tempTask = taskList.get(i);
         tempTask.setStatus(true);
-        System.out.println("[" + tempTask.getStatusIcon() + "] " + tempTask.getDescription());
+        System.out.println("[" + tempTask.getStatusIcon() + "] " + tempTask.toString());
     }
 
     public static void unmarkTaskAsDone(String taskNumber) {
@@ -68,6 +68,6 @@ public class ProcrastinAid {
         int i = Integer.parseInt(taskNumber) - 1;
         Task tempTask = taskList.get(i);
         tempTask.setStatus(false);
-        System.out.println("[" + tempTask.getStatusIcon() + "] " + tempTask.getDescription());
+        System.out.println("[" + tempTask.getStatusIcon() + "] " + tempTask.toString());
     }
 }

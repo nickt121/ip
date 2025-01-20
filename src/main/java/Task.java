@@ -15,7 +15,8 @@ public class Task {
         this.isDone = isDone;
     }
 
-    public String getDescription() {
+    @Override
+    public String toString() {
         return description;
     }
 }
