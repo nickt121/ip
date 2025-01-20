@@ -1,6 +1,14 @@
+import java.util.Scanner;
+
 public class ProcrastinAid {
     public static void main(String[] args) {
         hello();
+        Scanner userInput = new Scanner(System.in);
+        while(true){
+            String inp = userInput.nextLine();
+            if (inp.equals("bye")){break;}
+            System.out.println(inp + "\n");
+        }
         bye();
     }
 
