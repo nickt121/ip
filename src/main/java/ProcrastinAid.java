@@ -20,8 +20,14 @@ public class ProcrastinAid {
             } else if (inp.startsWith("unmark")) {
                 String[] splitString = inp.split(" ");
                 unmarkTaskAsDone(splitString[1]);
+            } else if (inp.startsWith("todo")) {
+                addTask(inp.split(" ", 2)[1], 1);
+            } else if (inp.startsWith("deadline")) {
+                addTask(inp.split(" ", 2)[1], 2);
+            } else if (inp.startsWith("event")) {
+                addTask(inp.split(" ", 2)[1], 3);
             } else {
-                addTask(inp);
+                ;
             }
         }
         bye();
@@ -41,17 +47,50 @@ public class ProcrastinAid {
         return userInput.nextLine();
     }
 
-    public static void addTask(String task) {
-        System.out.println("Added: " + task);
-        Task newTask = new Task(task);
+    public static void addTask(String userInp, int type){
+        System.out.println("Got it. I've added this task:");
+        Task newTask = null;
+        switch (type) {
+            case 1:
+                newTask = addTodo(userInp);
+                break;
+            case 2:
+                newTask = addDeadline(userInp);
+                break;
+            case 3:
+                newTask = addEvent(userInp);
+                break;
+        }
+        System.out.println(newTask.getIcon() + newTask.getStatusIcon() + " " + newTask);
+        System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
+    }
+
+    public static Task addTodo(String userInp){
+        Task newTask = new ToDo(userInp);
+        System.out.println(newTask.getIcon() + newTask.getStatusIcon() + " " + newTask);
         taskList.add(newTask);
+        return newTask;
+    }
+
+    public static Task addEvent(String userInp){
+        String[] dates = userInp.split(" /from ", 2)[1].split(" /to ", 2);
+        Task newTask = new Event(userInp.split(" /from ", 2)[0], dates[0], dates[1]);
+        taskList.add(newTask);
+        return newTask;
+    }
+
+    public static Task addDeadline(String userInp){
+        String[] args = userInp.split(" /by ", 2);
+        Task newTask = new Deadline(args[0], args[1]);
+        taskList.add(newTask);
+        return newTask;
     }
 
     public static void printTasks() {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             Task tempTask = taskList.get(i);
-            System.out.println(String.valueOf(i + 1) + ".[" + tempTask.getStatusIcon() + "] " + tempTask.toString());
+            System.out.println(String.valueOf(i + 1) + "." + tempTask.getIcon() + tempTask.getStatusIcon() + " " + tempTask.toString());
         }
     }
 
@@ -60,7 +99,7 @@ public class ProcrastinAid {
         int i = Integer.parseInt(taskNumber) - 1;
         Task tempTask = taskList.get(i);
         tempTask.setStatus(true);
-        System.out.println("[" + tempTask.getStatusIcon() + "] " + tempTask.toString());
+        System.out.println(tempTask.getIcon() + tempTask.getStatusIcon() + " " + tempTask.toString());
     }
 
     public static void unmarkTaskAsDone(String taskNumber) {
@@ -68,6 +107,6 @@ public class ProcrastinAid {
         int i = Integer.parseInt(taskNumber) - 1;
         Task tempTask = taskList.get(i);
         tempTask.setStatus(false);
-        System.out.println("[" + tempTask.getStatusIcon() + "] " + tempTask.toString());
+        System.out.println(tempTask.getIcon() + tempTask.getStatusIcon() + " " + tempTask.toString());
     }
 }
