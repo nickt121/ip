@@ -1,5 +1,5 @@
-public class Task {
-    private String description;
+public abstract class Task {
+    private final String description;
     private boolean isDone;
 
     public Task(String description) {
@@ -8,8 +8,10 @@ public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "[X]" : "[ ]"); // mark done task with X
     }
+
+    public abstract String getIcon();
 
     public void setStatus(boolean isDone) {
         this.isDone = isDone;
