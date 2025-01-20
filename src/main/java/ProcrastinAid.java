@@ -37,9 +37,13 @@ public class ProcrastinAid {
 
     public static void addTask(String task) {
         taskList.add(task);
+        System.out.println("Added: " + task);
+        Task newTask = new Task(task);
+        taskList.add(newTask);
     }
 
     public static void printTasks() {
+        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println(String.valueOf(i) + ' ' + taskList.get(i));
         }
