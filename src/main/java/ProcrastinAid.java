@@ -5,7 +5,7 @@ public class ProcrastinAid {
         hello();
         Scanner userInput = new Scanner(System.in);
         while(true){
-            String inp = userInput.nextLine();
+            String inp = getInput(userInput);
             if (inp.equals("bye")){break;}
             System.out.println(inp + "\n");
         }
@@ -19,5 +19,10 @@ public class ProcrastinAid {
 
     public static void bye(){
         System.out.println("Bye. Hope to see you again soon!\n");
+    }
+
+    public static String getInput(Scanner userInput){
+        System.out.print("> ");
+        return userInput.nextLine();
     }
 }
