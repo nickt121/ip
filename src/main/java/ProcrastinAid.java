@@ -16,10 +16,10 @@ public class ProcrastinAid {
                 } else if (inp.equals("list")) {
                     printTasks();
                 } else if (inp.startsWith("mark")) {
-                    String[] splitString = inp.split(" ");
+                    String[] splitString = parseInput(inp);
                     markTaskAsDone(splitString[1], true);
                 } else if (inp.startsWith("unmark")) {
-                    String[] splitString = inp.split(" ");
+                    String[] splitString = parseInput(inp);
                     markTaskAsDone(splitString[1], false);
                 } else if (inp.startsWith("todo")) {
                     String[] parsedInput = parseInput(inp);
@@ -28,6 +28,8 @@ public class ProcrastinAid {
                     addTask(inp.split(" ", 2)[1], 2);
                 } else if (inp.startsWith("event")) {
                     addTask(inp.split(" ", 2)[1], 3);
+                } else if (inp.startsWith("delete")) {
+                    deleteTask(inp.split(" ", 2)[1]);
                 } else {
                     System.out.println("Oops I don't know what to do with " + inp);
                 }
@@ -93,7 +95,6 @@ public class ProcrastinAid {
     }
 
     public static void markTaskAsDone(String taskNumber, boolean done) {
-
         int i = Integer.parseInt(taskNumber) - 1;
         try {
             Task tempTask = taskList.get(i);
@@ -104,6 +105,19 @@ public class ProcrastinAid {
             } else {
                 System.out.println("OK, I've marked this task as not done yet:");
             }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Sorry, that task is not in the list");
+        }
+    }
+
+    public static void deleteTask(String taskNumber) {
+        int i = Integer.parseInt(taskNumber) - 1;
+        try {
+            Task tempTask = taskList.get(i);
+            taskList.remove(i);
+            System.out.println("Noted. I've removed this task:");
+            System.out.println(tempTask.getIcon() + tempTask.getStatusIcon() + " " + tempTask);
+            System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry, that task is not in the list");
         }
