@@ -10,24 +10,29 @@ public class ProcrastinAid {
 
         while (true) {
             String inp = getInput(userInput);
-            if (inp.equals("bye")) {
-                break;
-            } else if (inp.equals("list")) {
-                printTasks();
-            } else if (inp.startsWith("mark")) {
-                String[] splitString = inp.split(" ");
-                markTaskAsDone(splitString[1]);
-            } else if (inp.startsWith("unmark")) {
-                String[] splitString = inp.split(" ");
-                unmarkTaskAsDone(splitString[1]);
-            } else if (inp.startsWith("todo")) {
-                addTask(inp.split(" ", 2)[1], 1);
-            } else if (inp.startsWith("deadline")) {
-                addTask(inp.split(" ", 2)[1], 2);
-            } else if (inp.startsWith("event")) {
-                addTask(inp.split(" ", 2)[1], 3);
-            } else {
-                ;
+            try {
+                if (inp.equals("bye")) {
+                    break;
+                } else if (inp.equals("list")) {
+                    printTasks();
+                } else if (inp.startsWith("mark")) {
+                    String[] splitString = inp.split(" ");
+                    markTaskAsDone(splitString[1], true);
+                } else if (inp.startsWith("unmark")) {
+                    String[] splitString = inp.split(" ");
+                    markTaskAsDone(splitString[1], false);
+                } else if (inp.startsWith("todo")) {
+                    String[] parsedInput = parseInput(inp);
+                    addTask(parsedInput[1], 1);
+                } else if (inp.startsWith("deadline")) {
+                    addTask(inp.split(" ", 2)[1], 2);
+                } else if (inp.startsWith("event")) {
+                    addTask(inp.split(" ", 2)[1], 3);
+                } else {
+                    System.out.println("Oops I don't know what to do with " + inp);
+                }
+            } catch (ProcrastinAidException e) {
+                System.out.println(e.getMessage());
             }
         }
         bye();
@@ -47,7 +52,7 @@ public class ProcrastinAid {
         return userInput.nextLine();
     }
 
-    public static void addTask(String userInp, int type){
+    public static void addTask(String userInp, int type) {
         System.out.println("Got it. I've added this task:");
         Task newTask = switch (type) {
             case 1 -> addTodo(userInp);
@@ -59,20 +64,20 @@ public class ProcrastinAid {
         System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
     }
 
-    public static Task addTodo(String userInp){
+    public static Task addTodo(String userInp) {
         Task newTask = new ToDo(userInp);
         taskList.add(newTask);
         return newTask;
     }
 
-    public static Task addEvent(String userInp){
+    public static Task addEvent(String userInp) {
         String[] dates = userInp.split(" /from ", 2)[1].split(" /to ", 2);
         Task newTask = new Event(userInp.split(" /from ", 2)[0], dates[0], dates[1]);
         taskList.add(newTask);
         return newTask;
     }
 
-    public static Task addDeadline(String userInp){
+    public static Task addDeadline(String userInp) {
         String[] args = userInp.split(" /by ", 2);
         Task newTask = new Deadline(args[0], args[1]);
         taskList.add(newTask);
@@ -87,19 +92,29 @@ public class ProcrastinAid {
         }
     }
 
-    public static void markTaskAsDone(String taskNumber) {
-        System.out.println("Nice! I've marked this task as done:");
+    public static void markTaskAsDone(String taskNumber, boolean done) {
+
         int i = Integer.parseInt(taskNumber) - 1;
-        Task tempTask = taskList.get(i);
-        tempTask.setStatus(true);
-        System.out.println(tempTask.getIcon() + tempTask.getStatusIcon() + " " + tempTask);
+        try {
+            Task tempTask = taskList.get(i);
+            tempTask.setStatus(done);
+            System.out.println(tempTask.getIcon() + tempTask.getStatusIcon() + " " + tempTask);
+            if (done) {
+                System.out.println("Nice! I've marked this task as done:");
+            } else {
+                System.out.println("OK, I've marked this task as not done yet:");
+            }
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Sorry, that task is not in the list");
+        }
     }
 
-    public static void unmarkTaskAsDone(String taskNumber) {
-        System.out.println("OK, I've marked this task as not done yet:");
-        int i = Integer.parseInt(taskNumber) - 1;
-        Task tempTask = taskList.get(i);
-        tempTask.setStatus(false);
-        System.out.println(tempTask.getIcon() + tempTask.getStatusIcon() + " " + tempTask);
+    public static String[] parseInput(String input) throws ProcrastinAidException {
+        String[] inputs = input.split(" ", 2);
+        if (inputs.length == 2) {
+            return inputs;
+        } else {
+            throw new ProcrastinAidException("Not enough arguments for this command");
+        }
     }
 }
