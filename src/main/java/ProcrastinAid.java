@@ -23,11 +23,11 @@ public class ProcrastinAid {
                     markTaskAsDone(splitString[1], false);
                 } else if (inp.startsWith("todo")) {
                     String[] parsedInput = parseInput(inp);
-                    addTask(parsedInput[1], 1);
+                    addTask(parsedInput[1], TaskType.TODO);
                 } else if (inp.startsWith("deadline")) {
-                    addTask(inp.split(" ", 2)[1], 2);
+                    addTask(inp.split(" ", 2)[1], TaskType.DEADLINE);
                 } else if (inp.startsWith("event")) {
-                    addTask(inp.split(" ", 2)[1], 3);
+                    addTask(inp.split(" ", 2)[1], TaskType.EVENT);
                 } else if (inp.startsWith("delete")) {
                     deleteTask(inp.split(" ", 2)[1]);
                 } else {
@@ -54,12 +54,12 @@ public class ProcrastinAid {
         return userInput.nextLine();
     }
 
-    public static void addTask(String userInp, int type) {
+    public static void addTask(String userInp, TaskType type) {
         System.out.println("Got it. I've added this task:");
         Task newTask = switch (type) {
-            case 1 -> addTodo(userInp);
-            case 2 -> addDeadline(userInp);
-            case 3 -> addEvent(userInp);
+            case TODO -> addTodo(userInp);
+            case DEADLINE -> addDeadline(userInp);
+            case EVENT -> addEvent(userInp);
             default -> null;
         };
         System.out.println(newTask.getIcon() + newTask.getStatusIcon() + " " + newTask);
