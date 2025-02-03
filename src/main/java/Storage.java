@@ -24,6 +24,7 @@ public class Storage {
             for (Task task : tasks) {
                 String writeString = task.toFileFormat();
                 fw.write(writeString);
+                fw.write("\n");
             }
             fw.close();
         } catch (IOException e) {
@@ -43,6 +44,10 @@ public class Storage {
             sc.close();
         } catch (IOException e) {
             e.printStackTrace();
+            return new ArrayList<>(); // return an empty list if there is an error
+        } catch (ProcrastinAidException e) {
+            e.printStackTrace();
+            return new ArrayList<>(); // return an empty list if there is an error
         }
         return tasks;
     }

@@ -67,7 +67,7 @@ public class ProcrastinAid {
         return userInput.nextLine();
     }
 
-    public static void addTask(String userInp, TaskType type, Storage storage) {
+    public static void addTask(String userInp, TaskType type, Storage storage) throws ProcrastinAidException {
         System.out.println("Got it. I've added this task:");
         Task newTask = switch (type) {
             case TODO -> addTodo(userInp);
@@ -86,14 +86,14 @@ public class ProcrastinAid {
         return newTask;
     }
 
-    public static Task addEvent(String userInp) {
+    public static Task addEvent(String userInp) throws ProcrastinAidException {
         String[] dates = userInp.split(" /from ", 2)[1].split(" /to ", 2);
         Task newTask = new Event(userInp.split(" /from ", 2)[0], false, dates[0], dates[1]);
         taskList.add(newTask);
         return newTask;
     }
 
-    public static Task addDeadline(String userInp) {
+    public static Task addDeadline(String userInp) throws ProcrastinAidException {
         String[] args = userInp.split(" /by ", 2);
         Task newTask = new Deadline(args[0], false, args[1]);
         taskList.add(newTask);
