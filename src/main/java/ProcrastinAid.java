@@ -2,42 +2,55 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ProcrastinAid {
-    public static ArrayList<Task> taskList = new ArrayList<>();
+    public static Storage storageFile = new Storage("./tasks.txt");
+    public static ArrayList<Task> taskList = storageFile.loadFromFile();
 
     public static void main(String[] args) {
         hello();
         Scanner userInput = new Scanner(System.in);
+        boolean shouldExit = false;
 
-        while (true) {
+        while (!shouldExit) {
             String inp = getInput(userInput);
+            String command = inp.split(" ", 2)[0];
             try {
-                if (inp.equals("bye")) {
+                switch (command) {
+                case "bye":
+                    shouldExit = true;
+                    bye();
                     break;
-                } else if (inp.equals("list")) {
+                case "list":
                     printTasks();
-                } else if (inp.startsWith("mark")) {
+                    break;
+                case "mark":
                     String[] splitString = parseInput(inp);
                     markTaskAsDone(splitString[1], true);
-                } else if (inp.startsWith("unmark")) {
-                    String[] splitString = parseInput(inp);
-                    markTaskAsDone(splitString[1], false);
-                } else if (inp.startsWith("todo")) {
+                    break;
+                case "unmark":
+                    String[] splitString2 = parseInput(inp);
+                    markTaskAsDone(splitString2[1], false);
+                    break;
+                case "todo":
                     String[] parsedInput = parseInput(inp);
-                    addTask(parsedInput[1], TaskType.TODO);
-                } else if (inp.startsWith("deadline")) {
-                    addTask(inp.split(" ", 2)[1], TaskType.DEADLINE);
-                } else if (inp.startsWith("event")) {
-                    addTask(inp.split(" ", 2)[1], TaskType.EVENT);
-                } else if (inp.startsWith("delete")) {
+                    addTask(parsedInput[1], TaskType.TODO, storageFile);
+                    break;
+                case "deadline":
+                    addTask(inp.split(" ", 2)[1], TaskType.DEADLINE, storageFile);
+                    break;
+                case "event":
+                    addTask(inp.split(" ", 2)[1], TaskType.EVENT, storageFile);
+                    break;
+                case "delete":
                     deleteTask(inp.split(" ", 2)[1]);
-                } else {
+                    break;
+                default:
                     System.out.println("Oops I don't know what to do with " + inp);
+                    break;
                 }
             } catch (ProcrastinAidException e) {
                 System.out.println(e.getMessage());
             }
         }
-        bye();
     }
 
     public static void hello() {
@@ -54,7 +67,7 @@ public class ProcrastinAid {
         return userInput.nextLine();
     }
 
-    public static void addTask(String userInp, TaskType type) {
+    public static void addTask(String userInp, TaskType type, Storage storage) {
         System.out.println("Got it. I've added this task:");
         Task newTask = switch (type) {
             case TODO -> addTodo(userInp);
@@ -62,26 +75,27 @@ public class ProcrastinAid {
             case EVENT -> addEvent(userInp);
             default -> null;
         };
+        storage.saveToFile(taskList);
         System.out.println(newTask.getIcon() + newTask.getStatusIcon() + " " + newTask);
         System.out.printf("Now you have %d tasks in the list.\n", taskList.size());
     }
 
     public static Task addTodo(String userInp) {
-        Task newTask = new ToDo(userInp);
+        Task newTask = new ToDo(userInp, false);
         taskList.add(newTask);
         return newTask;
     }
 
     public static Task addEvent(String userInp) {
         String[] dates = userInp.split(" /from ", 2)[1].split(" /to ", 2);
-        Task newTask = new Event(userInp.split(" /from ", 2)[0], dates[0], dates[1]);
+        Task newTask = new Event(userInp.split(" /from ", 2)[0], false, dates[0], dates[1]);
         taskList.add(newTask);
         return newTask;
     }
 
     public static Task addDeadline(String userInp) {
         String[] args = userInp.split(" /by ", 2);
-        Task newTask = new Deadline(args[0], args[1]);
+        Task newTask = new Deadline(args[0], false, args[1]);
         taskList.add(newTask);
         return newTask;
     }
@@ -121,6 +135,7 @@ public class ProcrastinAid {
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry, that task is not in the list");
         }
+        storageFile.saveToFile(taskList);
     }
 
     public static String[] parseInput(String input) throws ProcrastinAidException {
