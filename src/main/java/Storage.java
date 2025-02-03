@@ -44,6 +44,10 @@ public class Storage {
             sc.close();
         } catch (IOException e) {
             e.printStackTrace();
+            return new ArrayList<>(); // return an empty list if there is an error
+        } catch (ProcrastinAidException e) {
+            e.printStackTrace();
+            return new ArrayList<>(); // return an empty list if there is an error
         }
         return tasks;
     }

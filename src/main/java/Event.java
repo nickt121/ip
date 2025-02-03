@@ -1,11 +1,20 @@
-public class Event extends Task {
-    private String startDate;
-    private String endDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
-    public Event(String description, boolean isDone, String startDate, String endDate) {
+public class Event extends Task {
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+
+    public Event(String description, boolean isDone, String startDate, String endDate) throws ProcrastinAidException {
         super(description, isDone);
-        this.startDate = startDate;
-        this.endDate = endDate;
+        try {
+            String expectedFormat = "yyyy-MM-dd HH:mm";
+            this.startDate = LocalDateTime.parse(startDate, DateTimeFormatter.ofPattern(expectedFormat));
+            this.endDate = LocalDateTime.parse(endDate, DateTimeFormatter.ofPattern(expectedFormat));
+        } catch (DateTimeParseException e) {
+            throw new ProcrastinAidException("Invalid date format. Please use the format yyyy-MM-dd HH:mm");
+        }
     }
 
     @Override
@@ -20,6 +29,8 @@ public class Event extends Task {
 
     @Override
     public String toFileFormat() {
-        return String.format("%c,%d,%s,%s,%s", 'E', this.getStatusInt(), super.toString(), this.startDate, this.endDate);
+        String formatStartDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(startDate);
+        String formatEndDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(endDate);
+        return String.format("%c,%d,%s,%s,%s", 'E', this.getStatusInt(), super.toString(), formatStartDate, formatEndDate);
     }
 }

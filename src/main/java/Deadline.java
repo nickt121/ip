@@ -1,10 +1,19 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 public class Deadline extends Task {
 
-    private String by;
+    private LocalDateTime by;
 
-    public Deadline(String description, boolean isDone, String by) {
+    public Deadline(String description, boolean isDone, String by) throws ProcrastinAidException {
         super(description, isDone);
-        this.by = by;
+        try {
+            String expectedFormat = "yyyy-MM-dd HH:mm";
+            this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(expectedFormat));
+        } catch (DateTimeParseException e) {
+            throw new ProcrastinAidException("Invalid date format. Please use the format yyyy-MM-dd HH:mm");
+        }
     }
 
     @Override
@@ -19,6 +28,7 @@ public class Deadline extends Task {
 
     @Override
     public String toFileFormat() {
-        return String.format("%c,%d,%s,%s", 'D', this.getStatusInt(), super.toString(), this.by);
+        return String.format("%c,%d,%s,%s", 'D', this.getStatusInt(), super.toString(),
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(by));
     }
 }
