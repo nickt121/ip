@@ -24,6 +24,7 @@ public class Storage {
             for (Task task : tasks) {
                 String writeString = task.toFileFormat();
                 fw.write(writeString);
+                fw.write("\n");
             }
             fw.close();
         } catch (IOException e) {
