@@ -27,6 +27,10 @@ public class Parser {
         this.currentInput = userInput.nextLine();
     }
 
+    public void setCurrentInput(String input) {
+        this.currentInput = input;
+    }
+
     public void getUserInput() {
         getStdIn();
         try {
