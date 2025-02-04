@@ -6,6 +6,9 @@ import java.time.format.DateTimeParseException;
 
 import procrastinaid.exception.ProcrastinAidException;
 
+/**
+ * Represents an event task.
+ */
 public class Event extends Task {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
