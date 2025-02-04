@@ -7,6 +7,9 @@ import java.util.Scanner;
 
 import procrastinaid.exception.ProcrastinAidException;
 
+/**
+ * Storage class to handle saving and loading of tasks to and from a file.
+ */
 public class Storage {
     private final String DATAFILE;
 
@@ -21,6 +24,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the tasks in the TaskList to a file.
+     *
+     * @param tasks TaskList to save to file.
+     */
     public void saveToFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(this.DATAFILE);
@@ -35,6 +43,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from a file and returns a TaskList.
+     *
+     * @return TaskList of tasks loaded from file.
+     */
     public TaskList loadFromFile() {
         TaskList tasks = new TaskList();
         try {

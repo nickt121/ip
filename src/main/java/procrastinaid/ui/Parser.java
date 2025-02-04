@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 import procrastinaid.exception.ProcrastinAidException;
 
+/**
+ * Represents a parser that parses user input. A parser object is created to parse user input and extract the command.
+ *
+ */
 public class Parser {
     private static Scanner userInput = new Scanner(System.in);
     private String currentInput;
@@ -16,12 +20,20 @@ public class Parser {
         this.rawArgs = "";
     }
 
+    /**
+     * Clears the current input. Should be called before getting new input.
+     *
+     */
     public void clearInput() {
         this.currentInput = "";
         this.command = "";
         this.rawArgs = "";
     }
 
+    /**
+     * Gets the standard input from the user. The input is stored in the currentInput attribute.
+     *
+     */
     public void getStdIn() {
         System.out.print("> ");
         this.currentInput = userInput.nextLine();
@@ -31,6 +43,12 @@ public class Parser {
         this.currentInput = input;
     }
 
+    /**
+     * Parses the user input by space. The first word is stored in the command attribute and the rest of the input is
+     * stored in the rawArgs attribute.
+     *
+     * @throws ProcrastinAidException If the input does not contain enough arguments.
+     */
     public void getUserInput() {
         getStdIn();
         try {
@@ -41,6 +59,12 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input by space. The first word is stored in the command attribute and the rest of the input is
+     * stored in the rawArgs attribute.
+     *
+     * @throws ProcrastinAidException If the input does not contain enough arguments.
+     */
     public void parseInputBySpace() throws ProcrastinAidException {
         String[] inputs = this.currentInput.split(" ", 2);
         if (inputs.length == 2) {
@@ -58,10 +82,20 @@ public class Parser {
         }
     }
 
+    /**
+     * Returns the command attribute.
+     *
+     * @return String The command attribute.
+     */
     public String getCommand() {
         return this.command;
     }
 
+    /**
+     * Returns the rawArgs attribute.
+     *
+     * @return String The rawArgs attribute.
+     */
     public String getRawArgs() {
         return this.rawArgs;
     }
