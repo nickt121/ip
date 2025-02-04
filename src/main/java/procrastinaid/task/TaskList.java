@@ -22,9 +22,9 @@ public class TaskList {
     }
 
     public Task markTaskAsDone(int index, boolean isDone) {
-        Task temp = this.tasks.get(index);
-        temp.setStatus(isDone);
-        return temp;
+        Task tempTask = this.tasks.get(index);
+        tempTask.setStatus(isDone);
+        return tempTask;
     }
 
     public void printTasks() {

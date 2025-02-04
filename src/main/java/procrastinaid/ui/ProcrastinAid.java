@@ -9,7 +9,7 @@ import procrastinaid.task.Storage;
 
 public class ProcrastinAid {
     private static Storage storageFile = new Storage("./tasks.txt");
-    private static TaskList taskList = storageFile.loadFromFile();
+    private static TaskList tasks = storageFile.loadFromFile();
 
     public static void main(String[] args) {
         Ui.hello();
@@ -28,7 +28,7 @@ public class ProcrastinAid {
                     Ui.bye();
                     break;
                 case "list":
-                    taskList.printTasks();
+                    tasks.printTasks();
                     break;
                 case "mark":
                     markTaskAsDone(arguments, true);
@@ -62,20 +62,20 @@ public class ProcrastinAid {
     public static void addTask(String userInp, TaskType type, Storage storage) throws ProcrastinAidException {
         System.out.println("Got it. I've added this procrastinaid.task:");
         Task newTask = switch (type) {
-            case TODO -> taskList.addTodo(userInp);
-            case DEADLINE -> taskList.addDeadline(userInp);
-            case EVENT -> taskList.addEvent(userInp);
+            case TODO -> tasks.addTodo(userInp);
+            case DEADLINE -> tasks.addDeadline(userInp);
+            case EVENT -> tasks.addEvent(userInp);
             default -> null;
         };
-        storage.saveToFile(taskList);
+        storage.saveToFile(tasks);
         Ui.showTask(newTask);
-        Ui.showTaskListSize(taskList.getSize());
+        Ui.showTaskListSize(tasks.getSize());
     }
 
     public static void markTaskAsDone(String taskNumber, boolean done) {
         int i = Integer.parseInt(taskNumber) - 1;
         try {
-            Task tempTask = taskList.markTaskAsDone(i, done);
+            Task tempTask = tasks.markTaskAsDone(i, done);
             Ui.showTask(tempTask);
             if (done) {
                 System.out.println("Nice! I've marked this procrastinaid.task as done:");
@@ -85,19 +85,19 @@ public class ProcrastinAid {
         } catch (IndexOutOfBoundsException e) {
             Ui.showNotInListMessage();
         }
-        storageFile.saveToFile(taskList);
+        storageFile.saveToFile(tasks);
     }
 
     public static void deleteTask(String taskNumber) {
         int i = Integer.parseInt(taskNumber) - 1;
         try {
-            Task tempTask = taskList.deleteTask(i);
+            Task tempTask = tasks.deleteTask(i);
             System.out.println("Noted. I've removed this procrastinaid.task:");
             Ui.showTask(tempTask);
-            Ui.showTaskListSize(taskList.getSize());
+            Ui.showTaskListSize(tasks.getSize());
         } catch (IndexOutOfBoundsException e) {
             Ui.showNotInListMessage();
         }
-        storageFile.saveToFile(taskList);
+        storageFile.saveToFile(tasks);
     }
 }
