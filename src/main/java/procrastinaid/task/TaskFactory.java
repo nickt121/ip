@@ -1,3 +1,7 @@
+package procrastinaid.task;
+
+import procrastinaid.exception.ProcrastinAidException;
+
 public class TaskFactory {
     public static Task createTaskFromFile(String fileLine) throws ProcrastinAidException {
         String[] parts = fileLine.split(",");
@@ -13,7 +17,7 @@ public class TaskFactory {
         case "E":
             return new Event(description, isDone, parts[3], parts[4]);
         default:
-            throw new IllegalArgumentException("Unknown task type: " + type);
+            throw new IllegalArgumentException("Unknown procrastinaid.task type: " + type);
         }
     }
 }

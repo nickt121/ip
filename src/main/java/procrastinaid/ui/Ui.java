@@ -1,6 +1,10 @@
+package procrastinaid.ui;
+
+import procrastinaid.task.Task;
+
 public class Ui {
     public static void hello() {
-        System.out.println("Hello! I'm ProcrastinAid");
+        System.out.println("Hello! I'm procrastinaid.ui.ProcrastinAid");
         System.out.println("What can I do for you?\n");
     }
 
@@ -17,6 +21,6 @@ public class Ui {
     }
 
     public static void showNotInListMessage() {
-        System.out.println("Sorry, that task is not in the list");
+        System.out.println("Sorry, that procrastinaid.task is not in the list");
     }
 }

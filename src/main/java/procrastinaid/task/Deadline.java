@@ -1,6 +1,10 @@
+package procrastinaid.task;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import procrastinaid.exception.ProcrastinAidException;
 
 public class Deadline extends Task {
 

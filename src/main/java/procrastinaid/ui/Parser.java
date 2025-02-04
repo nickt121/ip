@@ -1,4 +1,8 @@
+package procrastinaid.ui;
+
 import java.util.Scanner;
+
+import procrastinaid.exception.ProcrastinAidException;
 
 public class Parser {
     private static Scanner userInput = new Scanner(System.in);

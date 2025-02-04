@@ -1,4 +1,8 @@
+package procrastinaid.task;
+
 import java.util.ArrayList;
+
+import procrastinaid.exception.ProcrastinAidException;
 
 public class TaskList {
     private final ArrayList<Task> tasks;

@@ -1,3 +1,5 @@
+package procrastinaid.task;
+
 public abstract class Task {
     private final String description;
     private boolean isDone;
@@ -8,7 +10,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); // mark done task with X
+        return (isDone ? "[X]" : "[ ]"); // mark done procrastinaid.task with X
     }
 
     public abstract String getIcon();

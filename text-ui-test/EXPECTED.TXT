@@ -1,24 +1,24 @@
-Hello! I'm ProcrastinAid
+Hello! I'm procrastinaid.ui.ProcrastinAid
 What can I do for you?
 
 > Here are the tasks in your list:
-> Got it. I've added this task:
+> Got it. I've added this procrastinaid.task:
 [T][ ] todo1
 Now you have 1 tasks in the list.
-> Got it. I've added this task:
+> Got it. I've added this procrastinaid.task:
 [D][ ] deadline1 (by: Sunday)
 Now you have 2 tasks in the list.
-> Got it. I've added this task:
+> Got it. I've added this procrastinaid.task:
 [E][ ] event1 (from: Mon 2pm to: 4pm )
 Now you have 3 tasks in the list.
 > Here are the tasks in your list:
 1.[T][ ] todo1
 2.[D][ ] deadline1 (by: Sunday)
 3.[E][ ] event1 (from: Mon 2pm to: 4pm )
-> Got it. I've added this task:
+> Got it. I've added this procrastinaid.task:
 [D][ ] deadline2 (by: Sunday 4pm)
 Now you have 4 tasks in the list.
-> Got it. I've added this task:
+> Got it. I've added this procrastinaid.task:
 [T][ ] todo2
 Now you have 5 tasks in the list.
 > Here are the tasks in your list:
@@ -27,9 +27,9 @@ Now you have 5 tasks in the list.
 3.[E][ ] event1 (from: Mon 2pm to: 4pm )
 4.[D][ ] deadline2 (by: Sunday 4pm)
 5.[T][ ] todo2
-> Nice! I've marked this task as done:
+> Nice! I've marked this procrastinaid.task as done:
 [D][X] deadline1 (by: Sunday)
-> Nice! I've marked this task as done:
+> Nice! I've marked this procrastinaid.task as done:
 [D][X] deadline2 (by: Sunday 4pm)
 > Here are the tasks in your list:
 1.[T][ ] todo1
@@ -37,9 +37,9 @@ Now you have 5 tasks in the list.
 3.[E][ ] event1 (from: Mon 2pm to: 4pm )
 4.[D][X] deadline2 (by: Sunday 4pm)
 5.[T][ ] todo2
-> Nice! I've marked this task as done:
+> Nice! I've marked this procrastinaid.task as done:
 [T][X] todo1
-> OK, I've marked this task as not done yet:
+> OK, I've marked this procrastinaid.task as not done yet:
 [D][ ] deadline1 (by: Sunday)
 > Here are the tasks in your list:
 1.[T][X] todo1
