@@ -1,4 +1,4 @@
-# ProcrastinAid User Guide
+# procrastinaid.ui.ProcrastinAid User Guide
 
 // Update the title above to match the actual product name
 
