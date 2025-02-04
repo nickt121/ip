@@ -11,13 +11,13 @@ import procrastinaid.exception.ProcrastinAidException;
  * Storage class to handle saving and loading of tasks to and from a file.
  */
 public class Storage {
-    private final String DATAFILE;
+    private final String FILEPATH;
 
     public Storage(String filename) {
-        this.DATAFILE = filename;
-        if (!new File(this.DATAFILE).exists()) {
+        this.FILEPATH = filename;
+        if (!new File(this.FILEPATH).exists()) {
             try {
-                new File(this.DATAFILE).createNewFile();
+                new File(this.FILEPATH).createNewFile();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -31,7 +31,7 @@ public class Storage {
      */
     public void saveToFile(TaskList tasks) {
         try {
-            FileWriter fw = new FileWriter(this.DATAFILE);
+            FileWriter fw = new FileWriter(this.FILEPATH);
             for (Task task : tasks.getTasks()) {
                 String writeString = task.toFileFormat();
                 fw.write(writeString);
@@ -51,7 +51,7 @@ public class Storage {
     public TaskList loadFromFile() {
         TaskList tasks = new TaskList();
         try {
-            Scanner sc = new Scanner(new File(this.DATAFILE));
+            Scanner sc = new Scanner(new File(this.FILEPATH));
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 Task newTask = TaskFactory.createTaskFromFile(line);

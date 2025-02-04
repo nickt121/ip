@@ -38,9 +38,9 @@ public class TaskList {
      * @return The task that was marked.
      */
     public Task markTaskAsDone(int index, boolean isDone) {
-        Task temp = this.tasks.get(index);
-        temp.setStatus(isDone);
-        return temp;
+        Task tempTask = this.tasks.get(index);
+        tempTask.setStatus(isDone);
+        return tempTask;
     }
 
     /**
