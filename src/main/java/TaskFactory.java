@@ -1,5 +1,5 @@
 public class TaskFactory {
-    public static Task createTask(String fileLine) throws ProcrastinAidException {
+    public static Task createTaskFromFile(String fileLine) throws ProcrastinAidException {
         String[] parts = fileLine.split(",");
         String type = parts[0];
         boolean isDone = parts[1].equals("1");

@@ -18,10 +18,10 @@ public class Storage {
         }
     }
 
-    public void saveToFile(ArrayList<Task> tasks) {
+    public void saveToFile(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(this.DATAFILE);
-            for (Task task : tasks) {
+            for (Task task : tasks.getTasks()) {
                 String writeString = task.toFileFormat();
                 fw.write(writeString);
                 fw.write("\n");
@@ -32,22 +32,22 @@ public class Storage {
         }
     }
 
-    public ArrayList<Task> loadFromFile() {
-        ArrayList<Task> tasks = new ArrayList<>();
+    public TaskList loadFromFile() {
+        TaskList tasks = new TaskList();
         try {
             Scanner sc = new Scanner(new File(this.DATAFILE));
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
-                Task newTask = TaskFactory.createTask(line);
-                tasks.add(newTask);
+                Task newTask = TaskFactory.createTaskFromFile(line);
+                tasks.addTask(newTask);
             }
             sc.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return new ArrayList<>(); // return an empty list if there is an error
+            return new TaskList(); // return an empty list if there is an error
         } catch (ProcrastinAidException e) {
             e.printStackTrace();
-            return new ArrayList<>(); // return an empty list if there is an error
+            return new TaskList(); // return an empty list if there is an error
         }
         return tasks;
     }
