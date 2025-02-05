@@ -49,7 +49,7 @@ public class ProcrastinAid {
                     deleteTask(arguments);
                     break;
                 case "find":
-                    taskList.findTasks(arguments);
+                    tasks.findTasks(arguments);
                     break;
                 default:
                     System.out.println("Oops I don't know what to do with " + arguments);
