@@ -14,6 +14,10 @@ public class Parser {
     private String command;
     private String rawArgs;
 
+    /**
+     * Constructor for Parser.
+     *
+     */
     public Parser() {
         this.currentInput = "";
         this.command = "";
@@ -51,6 +55,22 @@ public class Parser {
      */
     public void getUserInput() {
         getStdIn();
+        try {
+            parseInputBySpace();
+        } catch (ProcrastinAidException e) {
+            System.out.println(e.getMessage());
+            this.command = "";
+        }
+    }
+
+    /**
+     * Parses the user input by space. The first word is stored in the command attribute and the rest of the input is
+     * stored in the rawArgs attribute.
+     *
+     * @throws ProcrastinAidException If the input does not contain enough arguments.
+     */
+    public void getUserInput(String userInput) {
+        this.currentInput = userInput;
         try {
             parseInputBySpace();
         } catch (ProcrastinAidException e) {

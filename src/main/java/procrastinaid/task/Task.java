@@ -7,6 +7,12 @@ public abstract class Task {
     private final String description;
     private boolean isDone;
 
+    /**
+     * Constructor for the procrastinaid.task class.
+     *
+     * @param description Description of the procrastinaid.task.
+     * @param isDone      Status of the procrastinaid.task.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;

@@ -44,15 +44,18 @@ public class TaskList {
     }
 
     /**
-     * Prints all the tasks in the list.
+     * Returns all the tasks in the list as string.
+     *
+     * @return The list of tasks as string.
      */
-    public void printTasks() {
-        System.out.println("Here are the tasks in your list:");
+    public String printTasks() {
+        String returnString = "Here are the tasks in your list:\n";
         for (int i = 0; i < this.tasks.size(); i++) {
             Task tempTask = this.tasks.get(i);
-            System.out.println(String.valueOf(i + 1) + "." + tempTask.getIcon() + tempTask.getStatusIcon() + " "
-                    + tempTask);
+            returnString += String.valueOf(i + 1) + "." + tempTask.getIcon() + tempTask.getStatusIcon() + " "
+                    + tempTask + "\n";
         }
+        return returnString;
     }
 
     /**
@@ -124,14 +127,21 @@ public class TaskList {
         return newTask;
     }
 
-    public void findTasks(String keyword) {
-        System.out.println("Here are the matching tasks in your list:");
+    /**
+     * Finds tasks that contain the keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @return The tasks that contain the keyword.
+     */
+    public String findTasks(String keyword) {
+        String returnString = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < this.tasks.size(); i++) {
             Task tempTask = this.tasks.get(i);
             if (tempTask.toString().contains(keyword)) {
-                System.out.println(String.valueOf(i + 1) + "." + tempTask.getIcon() + tempTask.getStatusIcon() + " "
-                        + tempTask);
+                returnString += String.valueOf(i + 1) + "." + tempTask.getIcon() + tempTask.getStatusIcon() + " "
+                        + tempTask + "\n";
             }
         }
+        return returnString;
     }
 }
