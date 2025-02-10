@@ -3,9 +3,9 @@ package procrastinaid.ui;
 import java.util.Scanner;
 
 import procrastinaid.exception.ProcrastinAidException;
+import procrastinaid.task.Storage;
 import procrastinaid.task.Task;
 import procrastinaid.task.TaskList;
-import procrastinaid.task.Storage;
 
 public class ProcrastinAid {
     private static Storage storageFile = new Storage("./tasks.txt");
@@ -65,10 +65,10 @@ public class ProcrastinAid {
     public static void addTask(String userInp, TaskType type, Storage storage) throws ProcrastinAidException {
         System.out.println("Got it. I've added this procrastinaid.task:");
         Task newTask = switch (type) {
-            case TODO -> tasks.addTodo(userInp);
-            case DEADLINE -> tasks.addDeadline(userInp);
-            case EVENT -> tasks.addEvent(userInp);
-            default -> null;
+        case TODO -> tasks.addTodo(userInp);
+        case DEADLINE -> tasks.addDeadline(userInp);
+        case EVENT -> tasks.addEvent(userInp);
+        default -> null;
         };
         storage.saveToFile(tasks);
         Ui.showTask(newTask);

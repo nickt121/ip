@@ -50,7 +50,8 @@ public class TaskList {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < this.tasks.size(); i++) {
             Task tempTask = this.tasks.get(i);
-            System.out.println(String.valueOf(i + 1) + "." + tempTask.getIcon() + tempTask.getStatusIcon() + " " + tempTask);
+            System.out.println(String.valueOf(i + 1) + "." + tempTask.getIcon() + tempTask.getStatusIcon() + " "
+                    + tempTask);
         }
     }
 
@@ -128,7 +129,8 @@ public class TaskList {
         for (int i = 0; i < this.tasks.size(); i++) {
             Task tempTask = this.tasks.get(i);
             if (tempTask.toString().contains(keyword)) {
-                System.out.println(String.valueOf(i + 1) + "." + tempTask.getIcon() + tempTask.getStatusIcon() + " " + tempTask);
+                System.out.println(String.valueOf(i + 1) + "." + tempTask.getIcon() + tempTask.getStatusIcon() + " "
+                        + tempTask);
             }
         }
     }

@@ -38,6 +38,7 @@ public class Event extends Task {
     public String toFileFormat() {
         String formatStartDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(startDate);
         String formatEndDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(endDate);
-        return String.format("%c,%d,%s,%s,%s", 'E', this.getStatusInt(), super.toString(), formatStartDate, formatEndDate);
+        return String.format("%c,%d,%s,%s,%s", 'E', this.getStatusInt(), super.toString(), formatStartDate,
+                formatEndDate);
     }
 }
