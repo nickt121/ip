@@ -52,7 +52,7 @@ public class ProcrastinAid {
                     tasks.findTasks(arguments);
                     break;
                 default:
-                    System.out.println("Oops I don't know what to do with " + arguments);
+                    Ui.showUnknownCommandMessage(arguments);
                     break;
                 }
             } catch (ProcrastinAidException e) {
@@ -62,13 +62,17 @@ public class ProcrastinAid {
         }
     }
 
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
     public static void addTask(String userInp, TaskType type, Storage storage) throws ProcrastinAidException {
         System.out.println("Got it. I've added this procrastinaid.task:");
         Task newTask = switch (type) {
-        case TODO -> tasks.addTodo(userInp);
-        case DEADLINE -> tasks.addDeadline(userInp);
-        case EVENT -> tasks.addEvent(userInp);
-        default -> null;
+            case TODO -> tasks.addTodo(userInp);
+            case DEADLINE -> tasks.addDeadline(userInp);
+            case EVENT -> tasks.addEvent(userInp);
+            default -> null;
         };
         storage.saveToFile(tasks);
         Ui.showTask(newTask);

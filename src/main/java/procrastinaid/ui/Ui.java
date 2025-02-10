@@ -23,4 +23,8 @@ public class Ui {
     public static void showNotInListMessage() {
         System.out.println("Sorry, that procrastinaid.task is not in the list");
     }
+
+    public static void showUnknownCommandMessage(String arguments) {
+        System.out.println("Oops I don't know what to do with " + arguments);
+    }
 }
