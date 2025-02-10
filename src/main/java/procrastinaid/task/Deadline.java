@@ -6,10 +6,21 @@ import java.time.format.DateTimeParseException;
 
 import procrastinaid.exception.ProcrastinAidException;
 
+/**
+ * Represents a deadline task.
+ */
 public class Deadline extends Task {
 
     private LocalDateTime by;
 
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description The description of the deadline.
+     * @param isDone      The status of the deadline.
+     * @param by          The due date of the deadline.
+     * @throws ProcrastinAidException If the date format is invalid.
+     */
     public Deadline(String description, boolean isDone, String by) throws ProcrastinAidException {
         super(description, isDone);
         try {

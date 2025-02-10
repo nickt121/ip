@@ -13,6 +13,15 @@ public class Event extends Task {
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description The description of the event.
+     * @param isDone      The status of the event.
+     * @param startDate   The start date of the event.
+     * @param endDate     The end date of the event.
+     * @throws ProcrastinAidException If the date format is invalid.
+     */
     public Event(String description, boolean isDone, String startDate, String endDate) throws ProcrastinAidException {
         super(description, isDone);
         try {
