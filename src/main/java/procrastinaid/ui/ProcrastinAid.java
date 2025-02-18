@@ -162,8 +162,7 @@ public class ProcrastinAid {
     /**
      * Sets the tag of a task.
      *
-     * @param taskNumber The index of the task to be tagged.
-     * @param tag        The tag to be set.
+     * @param userInput The user input.
      * @return The message to be displayed.
      */
     public String setTag(String userInput) {
@@ -174,7 +173,7 @@ public class ProcrastinAid {
         try {
             Task tempTask = tasks.setTag(i, tag);
             storageFile.saveToFile(tasks);
-            return "Got it. I've added the tag to this procrastinaid.task:\n" + Ui.showTaskTag(tempTask);
+            return "Got it. I've added the tag to this task:\n" + Ui.showTaskTag(tempTask);
         } catch (IndexOutOfBoundsException e) {
             return Ui.showNotInListMessage();
         }

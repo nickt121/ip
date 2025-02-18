@@ -137,7 +137,7 @@ public class TaskList {
         String returnString = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < this.tasks.size(); i++) {
             Task tempTask = this.tasks.get(i);
-            if (tempTask.toString().contains(keyword)) {
+            if (tempTask.toString().contains(keyword) | tempTask.getTag().contains(keyword)) {
                 returnString += String.valueOf(i + 1) + "." + tempTask.getIcon() + tempTask.getStatusIcon() + " "
                         + tempTask + "\n";
             }
