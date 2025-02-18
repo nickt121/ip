@@ -93,7 +93,6 @@ public class ProcrastinAid {
         };
 
         assert newTask != null : "New task should not be null";
-      
         storage.saveToFile(tasks);
         returnString += Ui.showTask(newTask) + "\n";
         returnString += Ui.showTaskListSize(tasks.getSize());
