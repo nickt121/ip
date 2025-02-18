@@ -35,29 +35,41 @@ public class ProcrastinAid {
         System.out.println("Command: " + command);
         System.out.println("Arguments: " + arguments);
         try {
+            String response;
             switch (command) {
             case "bye":
                 System.exit(0);
-                return ""; // unreachable
+                response = ""; // unreachable
+                break;
             case "list":
-                return tasks.printTasks();
+                response = tasks.printTasks();
+                break;
             case "mark":
-                return markTaskAsDone(arguments, true);
+                response = markTaskAsDone(arguments, true);
+                break;
             case "unmark":
-                return markTaskAsDone(arguments, false);
+                response = markTaskAsDone(arguments, false);
+                break;
             case "todo":
-                return addTask(arguments, TaskType.TODO, storageFile);
+                response = addTask(arguments, TaskType.TODO, storageFile);
+                break;
             case "deadline":
-                return addTask(arguments, TaskType.DEADLINE, storageFile);
+                response = addTask(arguments, TaskType.DEADLINE, storageFile);
+                break;
             case "event":
-                return addTask(arguments, TaskType.EVENT, storageFile);
+                response = addTask(arguments, TaskType.EVENT, storageFile);
+                break;
             case "delete":
-                return deleteTask(arguments);
+                response = deleteTask(arguments);
+                break;
             case "find":
-                return tasks.findTasks(arguments);
+                response = tasks.findTasks(arguments);
+                break;
             default:
-                return Ui.showUnknownCommandMessage(input);
+                response = Ui.showUnknownCommandMessage(input);
             }
+            assert response != null : "Response should not be null";
+            return response;
         } catch (ProcrastinAidException e) {
             return e.getMessage();
         }
@@ -74,11 +86,12 @@ public class ProcrastinAid {
     public String addTask(String userInp, TaskType type, Storage storage) throws ProcrastinAidException {
         String returnString = "Got it. I've added this procrastinaid.task:\n";
         Task newTask = switch (type) {
-            case TODO -> tasks.addTodo(userInp);
-            case DEADLINE -> tasks.addDeadline(userInp);
-            case EVENT -> tasks.addEvent(userInp);
-            default -> null;
+        case TODO -> tasks.addTodo(userInp);
+        case DEADLINE -> tasks.addDeadline(userInp);
+        case EVENT -> tasks.addEvent(userInp);
+        default -> null;
         };
+        assert newTask != null : "New task should not be null";
         storage.saveToFile(tasks);
         returnString += Ui.showTask(newTask) + "\n";
         returnString += Ui.showTaskListSize(tasks.getSize());
