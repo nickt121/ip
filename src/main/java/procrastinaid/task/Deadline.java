@@ -20,10 +20,11 @@ public class Deadline extends Task {
      * @param description The description of the deadline.
      * @param isDone      The status of the deadline.
      * @param by          The due date of the deadline.
+     * @param tag         The tag of the deadline.
      * @throws ProcrastinAidException If the date format is invalid.
      */
-    public Deadline(String description, boolean isDone, String by) throws ProcrastinAidException {
-        super(description, isDone);
+    public Deadline(String description, boolean isDone, String tag, String by) throws ProcrastinAidException {
+        super(description, isDone, tag);
         try {
             this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(DATE_FORMAT));
         } catch (DateTimeParseException e) {
@@ -43,7 +44,7 @@ public class Deadline extends Task {
 
     @Override
     public String toFileFormat() {
-        return String.format("%c,%d,%s,%s", 'D', this.getStatusInt(), super.toString(),
+        return String.format("%c,%d,%s,%s,%s", 'D', this.getStatusInt(), super.toString(), this.getTag(),
                 DateTimeFormatter.ofPattern(DATE_FORMAT).format(by));
     }
 }

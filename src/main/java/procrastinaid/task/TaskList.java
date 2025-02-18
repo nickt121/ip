@@ -94,7 +94,7 @@ public class TaskList {
      * @throws ProcrastinAidException If the user input is invalid.
      */
     public Task addTodo(String userInp) {
-        Task newTask = new ToDo(userInp, false);
+        Task newTask = new ToDo(userInp, false, "");
         this.addTask(newTask);
         return newTask;
     }
@@ -108,7 +108,7 @@ public class TaskList {
      */
     public Task addEvent(String userInp) throws ProcrastinAidException {
         String[] dates = userInp.split(" /from ", 2)[1].split(" /to ", 2);
-        Task newTask = new Event(userInp.split(" /from ", 2)[0], false, dates[0], dates[1]);
+        Task newTask = new Event(userInp.split(" /from ", 2)[0], false, "", dates[0], dates[1]);
         this.addTask(newTask);
         return newTask;
     }
@@ -122,7 +122,7 @@ public class TaskList {
      */
     public Task addDeadline(String userInp) throws ProcrastinAidException {
         String[] args = userInp.split(" /by ", 2);
-        Task newTask = new Deadline(args[0], false, args[1]);
+        Task newTask = new Deadline(args[0], false, "", args[1]);
         this.addTask(newTask);
         return newTask;
     }
@@ -143,5 +143,11 @@ public class TaskList {
             }
         }
         return returnString;
+    }
+
+    public Task setTag(int index, String tag) {
+        Task tempTask = this.tasks.get(index);
+        tempTask.setTag(tag);
+        return tempTask;
     }
 }

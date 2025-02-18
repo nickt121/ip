@@ -22,10 +22,12 @@ public class Event extends Task {
      * @param isDone      The status of the event.
      * @param startDate   The start date of the event.
      * @param endDate     The end date of the event.
+     * @param tag         The tag of the event.
      * @throws ProcrastinAidException If the date format is invalid.
      */
-    public Event(String description, boolean isDone, String startDate, String endDate) throws ProcrastinAidException {
-        super(description, isDone);
+    public Event(String description, boolean isDone, String tag,
+                 String startDate, String endDate) throws ProcrastinAidException {
+        super(description, isDone, tag);
         try {
             this.startDate = LocalDateTime.parse(startDate, DateTimeFormatter.ofPattern(DATE_FORMAT));
             this.endDate = LocalDateTime.parse(endDate, DateTimeFormatter.ofPattern(DATE_FORMAT));
@@ -48,7 +50,7 @@ public class Event extends Task {
     public String toFileFormat() {
         String formatStartDate = DateTimeFormatter.ofPattern(DATE_FORMAT).format(startDate);
         String formatEndDate = DateTimeFormatter.ofPattern(DATE_FORMAT).format(endDate);
-        return String.format("%c,%d,%s,%s,%s", 'E', this.getStatusInt(), super.toString(), formatStartDate,
-                formatEndDate);
+        return String.format("%c,%d,%s,%s,%s,%s", 'E', this.getStatusInt(), super.toString(), this.getTag(),
+                formatStartDate, formatEndDate);
     }
 }

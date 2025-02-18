@@ -19,14 +19,20 @@ public class TaskFactory {
         String type = parts[0];
         boolean isDone = parts[1].equals("1");
         String description = parts[2];
+        String tag;
+        try {
+            tag = parts[3];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            tag = "";
+        }
 
         switch (type) {
         case "T":
-            return new ToDo(description, isDone);
+            return new ToDo(description, isDone, tag);
         case "D":
-            return new Deadline(description, isDone, parts[3]);
+            return new Deadline(description, isDone, tag, parts[4]);
         case "E":
-            return new Event(description, isDone, parts[3], parts[4]);
+            return new Event(description, isDone, tag, parts[4], parts[5]);
         default:
             throw new IllegalArgumentException("Unknown procrastinaid.task type: " + type);
         }

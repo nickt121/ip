@@ -6,8 +6,15 @@ package procrastinaid.task;
 public class ToDo extends Task {
     private static final String ICON = "[T]";
 
-    public ToDo(String description, boolean isDone) {
-        super(description, isDone);
+    /**
+     * Constructor for ToDo.
+     *
+     * @param description The description of the to-do.
+     * @param isDone      The status of the to-do.
+     * @param tag         The tag of the to-do.
+     */
+    public ToDo(String description, boolean isDone, String tag) {
+        super(description, isDone, tag);
     }
 
     @Override
@@ -22,6 +29,6 @@ public class ToDo extends Task {
 
     @Override
     public String toFileFormat() {
-        return String.format("%c,%d,%s", 'T', this.getStatusInt(), super.toString());
+        return String.format("%c,%d,%s,%s", 'T', this.getStatusInt(), super.toString(), this.getTag());
     }
 }

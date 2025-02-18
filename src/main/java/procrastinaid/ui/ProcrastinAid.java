@@ -20,10 +20,10 @@ public class ProcrastinAid {
      * Constructor for ProcrastinAid.
      */
     public ProcrastinAid() {
-        storageFile = new Storage("./tasks.txt");
-        tasks = storageFile.loadFromFile();
-        parser = new Parser();
-        userInput = new Scanner(System.in);
+        this.storageFile = new Storage("./tasks.txt");
+        this.tasks = storageFile.loadFromFile();
+        this.parser = new Parser();
+        this.userInput = new Scanner(System.in);
     }
 
     public String getResponse(String input) {
@@ -65,6 +65,9 @@ public class ProcrastinAid {
             case "find":
                 response = tasks.findTasks(arguments);
                 break;
+            case "tag":
+                response = setTag(arguments);
+                break;
             default:
                 response = Ui.showUnknownCommandMessage(input);
             }
@@ -86,10 +89,10 @@ public class ProcrastinAid {
     public String addTask(String userInp, TaskType type, Storage storage) throws ProcrastinAidException {
         String returnString = "Got it. I've added this procrastinaid.task:\n";
         Task newTask = switch (type) {
-        case TODO -> tasks.addTodo(userInp);
-        case DEADLINE -> tasks.addDeadline(userInp);
-        case EVENT -> tasks.addEvent(userInp);
-        default -> null;
+            case TODO -> tasks.addTodo(userInp);
+            case DEADLINE -> tasks.addDeadline(userInp);
+            case EVENT -> tasks.addEvent(userInp);
+            default -> null;
         };
 
         assert newTask != null : "New task should not be null";
@@ -98,6 +101,16 @@ public class ProcrastinAid {
         returnString += Ui.showTaskListSize(tasks.getSize());
 
         return returnString;
+    }
+
+    /**
+     * Translates the task number from user input to the index in the list.
+     *
+     * @param taskNumber The task number from user input.
+     * @return The index of the task in the list.
+     */
+    public int translateTaskNumber(String taskNumber) {
+        return Integer.parseInt(taskNumber) - 1;
     }
 
     /**
@@ -146,7 +159,24 @@ public class ProcrastinAid {
         return returnString;
     }
 
-    public int translateTaskNumber(String taskNumber) {
-        return Integer.parseInt(taskNumber) - 1;
+    /**
+     * Sets the tag of a task.
+     *
+     * @param taskNumber The index of the task to be tagged.
+     * @param tag        The tag to be set.
+     * @return The message to be displayed.
+     */
+    public String setTag(String userInput) {
+        String[] splitInput = userInput.split(" ", 2);
+        String taskNumber = splitInput[0];
+        String tag = splitInput[1];
+        int i = translateTaskNumber(taskNumber);
+        try {
+            Task tempTask = tasks.setTag(i, tag);
+            storageFile.saveToFile(tasks);
+            return "Got it. I've added the tag to this procrastinaid.task:\n" + Ui.showTaskTag(tempTask);
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.showNotInListMessage();
+        }
     }
 }

@@ -6,6 +6,7 @@ package procrastinaid.task;
 public abstract class Task {
     private final String description;
     private boolean isDone;
+    private String tag;
 
     /**
      * Constructor for the procrastinaid.task class.
@@ -13,9 +14,10 @@ public abstract class Task {
      * @param description Description of the procrastinaid.task.
      * @param isDone      Status of the procrastinaid.task.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, String tag) {
         this.description = description;
         this.isDone = isDone;
+        this.tag = tag;
     }
 
     /**
@@ -46,6 +48,24 @@ public abstract class Task {
      */
     public void setStatus(boolean isDone) {
         this.isDone = isDone;
+    }
+
+    /**
+     * Sets the tag of the procrastinaid.task.
+     *
+     * @param tag The tag of the procrastinaid.task.
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    /**
+     * Returns the tag of the procrastinaid.task.
+     *
+     * @return Tag of the procrastinaid.task.
+     */
+    public String getTag() {
+        return tag;
     }
 
     /**

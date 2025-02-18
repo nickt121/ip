@@ -26,6 +26,10 @@ public class Ui {
         return task.getIcon() + task.getStatusIcon() + " " + task;
     }
 
+    public static String showTaskTag(Task task) {
+        return showTask(task) + " " + task.getTag();
+    }
+
     public static String showNotInListMessage() {
         return "Sorry, that procrastinaid.task is not in the list";
     }
