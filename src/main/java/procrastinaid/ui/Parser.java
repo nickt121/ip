@@ -46,6 +46,7 @@ public class Parser {
     }
 
     public void setCurrentInput(String input) {
+        assert input != null : "Input should not be null";
         this.currentInput = input;
     }
 

@@ -13,7 +13,13 @@ import procrastinaid.exception.ProcrastinAidException;
 public class Storage {
     private final String FILEPATH;
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param filename File path to save tasks to.
+     */
     public Storage(String filename) {
+        assert filename != null : "File path should not be null";
         this.FILEPATH = filename;
         if (!new File(this.FILEPATH).exists()) {
             try {
