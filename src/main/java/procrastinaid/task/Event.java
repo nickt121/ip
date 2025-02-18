@@ -10,6 +10,8 @@ import procrastinaid.exception.ProcrastinAidException;
  * Represents an event task.
  */
 public class Event extends Task {
+    private static final String ICON = "[E]";
+    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm";
     private LocalDateTime startDate;
     private LocalDateTime endDate;
 
@@ -25,11 +27,10 @@ public class Event extends Task {
     public Event(String description, boolean isDone, String startDate, String endDate) throws ProcrastinAidException {
         super(description, isDone);
         try {
-            String expectedFormat = "yyyy-MM-dd HH:mm";
-            this.startDate = LocalDateTime.parse(startDate, DateTimeFormatter.ofPattern(expectedFormat));
-            this.endDate = LocalDateTime.parse(endDate, DateTimeFormatter.ofPattern(expectedFormat));
+            this.startDate = LocalDateTime.parse(startDate, DateTimeFormatter.ofPattern(DATE_FORMAT));
+            this.endDate = LocalDateTime.parse(endDate, DateTimeFormatter.ofPattern(DATE_FORMAT));
         } catch (DateTimeParseException e) {
-            throw new ProcrastinAidException("Invalid date format. Please use the format yyyy-MM-dd HH:mm");
+            throw new ProcrastinAidException("Invalid date format. Please use the format " + DATE_FORMAT);
         }
     }
 
@@ -40,13 +41,13 @@ public class Event extends Task {
 
     @Override
     public String getIcon() {
-        return "[E]";
+        return ICON;
     }
 
     @Override
     public String toFileFormat() {
-        String formatStartDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(startDate);
-        String formatEndDate = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm").format(endDate);
+        String formatStartDate = DateTimeFormatter.ofPattern(DATE_FORMAT).format(startDate);
+        String formatEndDate = DateTimeFormatter.ofPattern(DATE_FORMAT).format(endDate);
         return String.format("%c,%d,%s,%s,%s", 'E', this.getStatusInt(), super.toString(), formatStartDate,
                 formatEndDate);
     }

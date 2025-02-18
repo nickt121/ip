@@ -57,13 +57,13 @@ public class Storage {
     public TaskList loadFromFile() {
         TaskList tasks = new TaskList();
         try {
-            Scanner sc = new Scanner(new File(this.FILEPATH));
-            while (sc.hasNextLine()) {
-                String line = sc.nextLine();
+            Scanner scanner = new Scanner(new File(this.FILEPATH));
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
                 Task newTask = TaskFactory.createTaskFromFile(line);
                 tasks.addTask(newTask);
             }
-            sc.close();
+            scanner.close();
         } catch (IOException e) {
             e.printStackTrace();
             return new TaskList(); // return an empty list if there is an error
