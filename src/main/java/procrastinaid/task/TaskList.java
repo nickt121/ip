@@ -107,6 +107,9 @@ public class TaskList {
      * @throws ProcrastinAidException If the user input is invalid.
      */
     public Task addEvent(String userInp) throws ProcrastinAidException {
+        if (!userInp.contains(" /from ") | !userInp.contains(" /to ")) {
+            throw new ProcrastinAidException("Please enter dates separated by /from and /to");
+        }
         String[] dates = userInp.split(" /from ", 2)[1].split(" /to ", 2);
         Task newTask = new Event(userInp.split(" /from ", 2)[0], false, "", dates[0], dates[1]);
         this.addTask(newTask);
@@ -121,6 +124,9 @@ public class TaskList {
      * @throws ProcrastinAidException If the user input is invalid.
      */
     public Task addDeadline(String userInp) throws ProcrastinAidException {
+        if (!userInp.contains(" /by ")) {
+            throw new ProcrastinAidException("Please enter a date separated by /by");
+        }
         String[] args = userInp.split(" /by ", 2);
         Task newTask = new Deadline(args[0], false, "", args[1]);
         this.addTask(newTask);

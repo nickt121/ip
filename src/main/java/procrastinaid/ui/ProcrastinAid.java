@@ -29,11 +29,8 @@ public class ProcrastinAid {
     public String getResponse(String input) {
         parser.clearInput();
         parser.getUserInput(input);
-        System.out.println("Input: " + input);
         String command = parser.getCommand();
         String arguments = parser.getRawArgs();
-        System.out.println("Command: " + command);
-        System.out.println("Arguments: " + arguments);
         try {
             String response;
             switch (command) {
@@ -89,10 +86,10 @@ public class ProcrastinAid {
     public String addTask(String userInp, TaskType type, Storage storage) throws ProcrastinAidException {
         String returnString = "Got it. I've added this procrastinaid.task:\n";
         Task newTask = switch (type) {
-            case TODO -> tasks.addTodo(userInp);
-            case DEADLINE -> tasks.addDeadline(userInp);
-            case EVENT -> tasks.addEvent(userInp);
-            default -> null;
+        case TODO -> tasks.addTodo(userInp);
+        case DEADLINE -> tasks.addDeadline(userInp);
+        case EVENT -> tasks.addEvent(userInp);
+        default -> null;
         };
 
         assert newTask != null : "New task should not be null";
