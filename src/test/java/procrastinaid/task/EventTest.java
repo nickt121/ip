@@ -11,7 +11,8 @@ public class EventTest {
     @Test
     public void testDateFormat() {
         Throwable exception = assertThrows(ProcrastinAidException.class, () -> {
-            Event event = new Event("test", false, "2021/09/01 12:00", "2021-09-01 12:00");
+            Event event = new Event("test", false, "",
+                    "2021/09/01 12:00", "2021-09-01 12:00");
         });
         assertEquals("Invalid date format. Please use the format yyyy-MM-dd HH:mm", exception.getMessage());
     }
