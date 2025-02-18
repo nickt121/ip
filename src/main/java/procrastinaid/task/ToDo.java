@@ -4,6 +4,8 @@ package procrastinaid.task;
  * Represents a to-do task.
  */
 public class ToDo extends Task {
+    private static final String ICON = "[T]";
+
     public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
@@ -15,7 +17,7 @@ public class ToDo extends Task {
 
     @Override
     public String getIcon() {
-        return "[T]";
+        return ICON;
     }
 
     @Override

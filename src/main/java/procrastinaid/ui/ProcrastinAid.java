@@ -79,6 +79,7 @@ public class ProcrastinAid {
             case EVENT -> tasks.addEvent(userInp);
             default -> null;
         };
+
         storage.saveToFile(tasks);
         returnString += Ui.showTask(newTask) + "\n";
         returnString += Ui.showTaskListSize(tasks.getSize());
@@ -95,7 +96,7 @@ public class ProcrastinAid {
      */
     public String markTaskAsDone(String taskNumber, boolean done) {
         String returnString = "";
-        int i = Integer.parseInt(taskNumber) - 1;
+        int i = translateTaskNumber(taskNumber);
         try {
             Task tempTask = tasks.markTaskAsDone(i, done);
             returnString += Ui.showTask(tempTask) + "\n";
@@ -119,7 +120,7 @@ public class ProcrastinAid {
      */
     public String deleteTask(String taskNumber) {
         String returnString = "";
-        int i = Integer.parseInt(taskNumber) - 1;
+        int i = translateTaskNumber(taskNumber);
         try {
             Task tempTask = tasks.deleteTask(i);
             returnString += "Noted. I've removed this procrastinaid.task:\n";
@@ -130,5 +131,9 @@ public class ProcrastinAid {
         }
         storageFile.saveToFile(tasks);
         return returnString;
+    }
+
+    public int translateTaskNumber(String taskNumber) {
+        return Integer.parseInt(taskNumber) - 1;
     }
 }

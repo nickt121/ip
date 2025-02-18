@@ -6,17 +6,21 @@ import procrastinaid.exception.ProcrastinAidException;
 
 /**
  * Represents a parser that parses user input. A parser object is created to parse user input and extract the command.
- *
  */
 public class Parser {
+    private static final String BYE_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String INPUT_PROMPT = "> ";
+    private static final String NOT_ENOUGH_ARGUMENTS_MESSAGE = "Not enough arguments for this command";
+
     private static Scanner userInput = new Scanner(System.in);
     private String currentInput;
     private String command;
     private String rawArgs;
 
+
     /**
      * Constructor for Parser.
-     *
      */
     public Parser() {
         this.currentInput = "";
@@ -26,7 +30,6 @@ public class Parser {
 
     /**
      * Clears the current input. Should be called before getting new input.
-     *
      */
     public void clearInput() {
         this.currentInput = "";
@@ -36,10 +39,9 @@ public class Parser {
 
     /**
      * Gets the standard input from the user. The input is stored in the currentInput attribute.
-     *
      */
     public void getStdIn() {
-        System.out.print("> ");
+        System.out.print(INPUT_PROMPT);
         this.currentInput = userInput.nextLine();
     }
 
@@ -92,13 +94,13 @@ public class Parser {
             this.rawArgs = inputs[1];
         } else if (inputs.length == 1) {
             this.command = inputs[0];
-            if (this.command.equals("list") || this.command.equals("bye")) {
+            if (this.command.equals(LIST_COMMAND) || this.command.equals(BYE_COMMAND)) {
                 this.rawArgs = "";
             } else {
-                throw new ProcrastinAidException("Not enough arguments for this command");
+                throw new ProcrastinAidException(NOT_ENOUGH_ARGUMENTS_MESSAGE);
             }
         } else {
-            throw new ProcrastinAidException("Not enough arguments for this command");
+            throw new ProcrastinAidException(NOT_ENOUGH_ARGUMENTS_MESSAGE);
         }
     }
 
