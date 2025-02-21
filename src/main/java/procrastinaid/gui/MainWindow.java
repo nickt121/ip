@@ -24,8 +24,8 @@ public class MainWindow extends AnchorPane {
 
     private ProcrastinAid chatbot;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image botImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Sample_User_Icon.png"));
+    private Image botImage = new Image(this.getClass().getResourceAsStream("/images/bot.png"));
 
     @FXML
     public void initialize() {
