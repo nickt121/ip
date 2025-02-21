@@ -168,9 +168,15 @@ public class ProcrastinAid {
      * @return The message to be displayed.
      */
     public String setTag(String userInput) {
-        String[] splitInput = userInput.split(" ", 2);
-        String taskNumber = splitInput[0];
-        String tag = splitInput[1];
+        String taskNumber;
+        String tag;
+        try {
+            String[] splitInput = userInput.split(" ", 2);
+            taskNumber = splitInput[0];
+            tag = splitInput[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return "Please enter a valid tag";
+        }
         int i = translateTaskNumber(taskNumber);
         try {
             Task tempTask = tasks.setTag(i, tag);
