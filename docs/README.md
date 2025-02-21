@@ -13,6 +13,10 @@ that users stay on top of their responsibilities.
 You can add deadlines to tasks by specifying a date and time. ProcrastinAid will display the deadline in the task list,
 allowing you to keep track of upcoming deadlines easily.
 
+Format: `deadline <description> /by <yyyy-MM-dd HH:mm>`
+Format: `event <description> /from <yyyy-MM-dd HH:mm> /to <yyyy-MM-dd HH:mm>`
+Format: `todo <description>`
+
 Example: `deadline Finish report /by 2021-09-30 23:59`
 
 Example: `event Meeting with team /from 2021-09-30 14:00 /to 2021-09-30 16:00`
@@ -29,3 +33,11 @@ including their type, description, and status.
 
 You can mark tasks as done by entering the `mark` command followed by the task number. ProcrastinAid will update the 
 task status to done, making it easy to track completed tasks.
+
+Format: `mark <task number>`
+
+## Feature Delete tasks
+
+You can delete tasks from the task list by entering the `delete` command followed by the task number. ProcrastinAid
+
+Format: `delete <task number>`
