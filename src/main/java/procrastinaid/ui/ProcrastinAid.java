@@ -119,8 +119,8 @@ public class ProcrastinAid {
      */
     public String markTaskAsDone(String taskNumber, boolean done) {
         String returnString = "";
-        int i = translateTaskNumber(taskNumber);
         try {
+            int i = translateTaskNumber(taskNumber);
             Task tempTask = tasks.markTaskAsDone(i, done);
             returnString += Ui.showTask(tempTask) + "\n";
             if (done) {
@@ -130,7 +130,10 @@ public class ProcrastinAid {
             }
         } catch (IndexOutOfBoundsException e) {
             return Ui.showNotInListMessage();
+        } catch (NumberFormatException e) {
+            return Ui.showInvalidTaskNumberMessage();
         }
+
         storageFile.saveToFile(tasks);
         return returnString;
     }
@@ -143,14 +146,16 @@ public class ProcrastinAid {
      */
     public String deleteTask(String taskNumber) {
         String returnString = "";
-        int i = translateTaskNumber(taskNumber);
         try {
+            int i = translateTaskNumber(taskNumber);
             Task tempTask = tasks.deleteTask(i);
             returnString += "Noted. I've removed this procrastinaid.task:\n";
             returnString += Ui.showTask(tempTask) + "\n";
             returnString += Ui.showTaskListSize(tasks.getSize());
         } catch (IndexOutOfBoundsException e) {
             return Ui.showNotInListMessage();
+        } catch (NumberFormatException e) {
+            return Ui.showInvalidTaskNumberMessage();
         }
         storageFile.saveToFile(tasks);
         return returnString;

@@ -37,4 +37,8 @@ public class Ui {
     public static String showUnknownCommandMessage(String arguments) {
         return "Oops I don't know what to do with " + arguments;
     }
+
+    public static String showInvalidTaskNumberMessage() {
+        return "Please enter a valid task number";
+    }
 }
